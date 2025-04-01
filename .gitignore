@@ -1,0 +1,7 @@
+.vs/
+x64/
+
+NeuralNetwork.sln 
+NeuralNetwork.vcxproj 
+NeuralNetwork.vcxproj.filters 
+NeuralNetwork.vcxproj.user
