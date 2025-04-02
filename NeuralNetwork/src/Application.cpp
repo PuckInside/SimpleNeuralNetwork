@@ -2,6 +2,7 @@
 #include <Eigen/Dense>
 
 #include "Layers/Linear.h"
+#include "Loss/MSELoss.h"
 
 void main()
 {
@@ -11,6 +12,7 @@ void main()
     Eigen::MatrixXd target(3, 1);
     target << 4.0, 2.0, 1.0;
 
+    MSELoss loss;
     Linear linearRegression(4, 3);
     Eigen::MatrixXd predict = linearRegression.Forward(inputs);
     std::cout << "Initial prediction:\n" << predict << "\n\n";
@@ -18,7 +20,7 @@ void main()
     for (int i = 0; i < 28; i++)
     {
         predict = linearRegression.Forward(inputs);
-        Eigen::MatrixXd grad = 2 * (predict - target);
+        Eigen::MatrixXd grad = loss.LossPrime(predict, target);
         
         linearRegression.Backward(grad, 0.01);
     }
