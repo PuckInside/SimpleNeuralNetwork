@@ -9,14 +9,17 @@ Linear::Linear(int inputSize, int outputSize)
 Eigen::MatrixXd Linear::Forward(Eigen::MatrixXd inputs)
 {
 	this->inputs = inputs;
-	Eigen::MatrixXd predict = this->weights * inputs + this->bias;
+	int batchSize = inputs.cols();
+
+	Eigen::MatrixXd predict = this->weights * this->inputs + this->bias.replicate(1, batchSize);
 	return predict;
 }
+
 
 Eigen::MatrixXd Linear::Backward(Eigen::MatrixXd outputGradient, double learningRate)
 {
 	this->weights -= outputGradient * this->inputs.transpose() * 0.01;
-	this->bias -= outputGradient * 0.01;
+	this->bias -= outputGradient.rowwise().sum() * 0.01;
 
 	Eigen::MatrixXd inputGradient = this->weights.transpose() * outputGradient;
 	return inputGradient;
