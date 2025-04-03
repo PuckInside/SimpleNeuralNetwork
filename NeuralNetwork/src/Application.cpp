@@ -1,9 +1,6 @@
 #include <iostream>
 #include <Eigen/Dense>
 
-#include <vector>
-#include <memory>
-
 #include "Models/Perceptron.h"
 #include "Loss/MSELoss.h"
 
@@ -15,7 +12,7 @@ void main()
     Eigen::MatrixXd target(3, 1);
     target << 0, 1.0, 0.0;
 
-    Perceptron model(4, 120, 3, 2);
+    Perceptron model(4, 64, 3, 2);
     MSELoss loss;
 
     Eigen::MatrixXd predict;
@@ -24,7 +21,7 @@ void main()
     std::cout << "Initial prediction:\n" << predict << "\n\n";
     std::cout << "Initial loss:\n" << loss.Loss(predict, target) << "\n\n";
 
-    model.Fit(inputs, target, 0.01, 10000);
+    model.Fit(inputs, target, 0.005, 2000);
     predict = model.Prediction(inputs);
 
     std::cout << "Final prediction:\n" << predict << "\n\n";
