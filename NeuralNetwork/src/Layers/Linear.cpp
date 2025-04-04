@@ -2,6 +2,11 @@
 
 Linear::Linear(int inputSize, int outputSize)
 {
+	if (inputSize <= 0)
+		throw std::exception();
+	if (outputSize <= 0)
+		throw std::exception();
+
 	this->weights = Eigen::MatrixXd::Random(outputSize, inputSize);
 	this->bias = Eigen::VectorXd::Random(outputSize);
 }
