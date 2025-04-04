@@ -4,6 +4,8 @@
 
 #include "../Interfaces/INeuralNetwork.h"
 #include "../Interfaces/ILayer.h"
+#include "../Interfaces/ILoss.h"
+
 #include "../Layers/Linear.h"
 #include "../Layers/ActivationLayers/Sigmoid.h"
 #include "../Loss/MSELoss.h"
@@ -11,7 +13,7 @@
 class Perceptron : public INeuralNetwork
 {
 private:
-	MSELoss loss;
+	std::shared_ptr<ILoss> loss;
 	std::vector<std::shared_ptr<ILayer>> layers;
 
 public:

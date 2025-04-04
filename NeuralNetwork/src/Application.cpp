@@ -21,7 +21,7 @@ void main()
     std::cout << "Initial prediction:\n" << predict << "\n\n";
     std::cout << "Initial loss:\n" << loss.Loss(predict, target) << "\n\n";
 
-    model.Fit(inputs, target, 0.005, 2000);
+    model.Fit(inputs, target, 0.005, 1000);
     predict = model.Prediction(inputs);
 
     std::cout << "Final prediction:\n" << predict << "\n\n";
